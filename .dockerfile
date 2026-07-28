@@ -3,11 +3,8 @@ FROM eclipse-temurin:17-jdk AS builder
 
 WORKDIR /build
 
-# Install git
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
-
-# Clone repository
-RUN git clone https://github.com/ninadb16/threaddump-demo.git .
+# Copy project files
+COPY . .
 
 # Make Maven wrapper executable
 RUN chmod +x mvnw
