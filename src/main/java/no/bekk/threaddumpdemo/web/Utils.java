@@ -1,12 +1,17 @@
 package no.bekk.threaddumpdemo.web;
 
-public class Utils {
+import java.time.Duration;
 
-    public static void sleep(long millis) {
+public final class Utils {
+    private Utils() {
+    }
+
+    public static void sleep(Duration duration) {
         try {
-            Thread.sleep(millis);
+            Thread.sleep(duration.toMillis());
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while simulating slow work", e);
         }
     }
 }
