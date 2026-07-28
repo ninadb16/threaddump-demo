@@ -9,16 +9,22 @@ to be used for experimenting with threaddumps.
     ```shell
     mvn spring-boot:run
     ```
-2. Trigger the scenario you want to test. Example scenario `database_read` here:
+    OR for running the application in docker
+   ```shell
+   docker build -t threaddump-demo .
+   docker run -p 8080:8080 threaddump-demo
+   ```
+    
+3. Trigger the scenario you want to test. Example scenario `database_read` here:
    ```shell
    curl http://localhost:8080/fakework/database_read
    ```
-3. Take the thread-dump, for example using `jcmd` (`| less` makes it easier to browse/search). You have 20s.
+4. Take the thread-dump, for example using `jcmd` (`| less` makes it easier to browse/search). You have 20s.
    ```shell
    jcmd no.bekk.threaddumpdemo.ThreaddumpDemoApplication Thread.print | less
    ```
 
-4. Find and inspect the relevant thread to see what the stack looks like for that particular scenario.
+5. Find and inspect the relevant thread to see what the stack looks like for that particular scenario.
     **Hint:** search for packages specific for this app, e.g. `no.bekk.threaddumpdemo`
 
 ## Alternative ways to get a thread-dump
